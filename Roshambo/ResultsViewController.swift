@@ -9,18 +9,26 @@
 import UIKit
 
 class ResultsViewController: UIViewController {
-    
+    var movesText: String?
     var resultsText: String?
+    var image: UIImage?
     
-    @IBOutlet weak var imageLabel: UILabel!
+    @IBOutlet weak var resultsLabel: UILabel!
+    @IBOutlet weak var movesLabel: UILabel!
+    @IBOutlet weak var imageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        if let resultsText = resultsText {
-            imageLabel.text = resultsText
+        if let movesText = movesText {
+            movesLabel.text = movesText
         }
+        if let resultsText = resultsText {
+            resultsLabel.text = resultsText
+        }
+        
+        imageView.image = image
     }
 
     override func didReceiveMemoryWarning() {
