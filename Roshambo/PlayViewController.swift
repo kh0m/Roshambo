@@ -9,7 +9,14 @@
 import UIKit
 
 class PlayViewController: UIViewController {    
-    enum MoveChoice: Int {case rock = 0, paper, scissors}
+    enum MoveChoice: Int {
+        case rock = 0, paper, scissors
+        
+        static func generateRandomSelection() -> MoveChoice {
+            let random = Int(arc4random() % 3)
+            return MoveChoice(rawValue: random)!
+        }
+    }
     
     @IBOutlet weak var rockButton: UIButton!
     @IBOutlet weak var paperButton: UIButton!
@@ -22,7 +29,7 @@ class PlayViewController: UIViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // computer moves
-        let computerChoice = generateRandomSelection()
+        let computerChoice = MoveChoice.generateRandomSelection()
         
         // declare the controller
         let controller = segue.destination as! ResultsViewController
@@ -59,14 +66,10 @@ class PlayViewController: UIViewController {
         }
     }
     
-    private func generateRandomSelection() -> MoveChoice {
-        let random = Int(arc4random() % 3)
-        return MoveChoice(rawValue: random)!
-    }
     
     @IBAction func playRock(_ sender: UIButton) {
         // computer moves
-        let computerChoice = generateRandomSelection()
+        let computerChoice = MoveChoice.generateRandomSelection()
         
         // declare the controller
         let controller = self.storyboard?.instantiateViewController(withIdentifier: "ResultsViewController") as! ResultsViewController
