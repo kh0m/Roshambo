@@ -9,9 +9,14 @@
 import UIKit
 
 class ResultsViewController: UIViewController {
+    
+    // MARK: Properties
+    
     var movesText: String?
     var resultsText: String?
     var image: UIImage?
+    
+    // MARK: Outlets
     
     @IBOutlet weak var resultsLabel: UILabel!
     @IBOutlet weak var movesLabel: UILabel!
@@ -31,13 +36,7 @@ class ResultsViewController: UIViewController {
         imageView.image = image
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-    @IBAction func playAgain(_ sender: UIButton) {
+    @IBAction func playAgain(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
     }
     
