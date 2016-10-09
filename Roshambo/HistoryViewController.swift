@@ -8,28 +8,49 @@
 
 import UIKit
 
-class HistoryViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+class HistoryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
+    // MARK: Properties
+    
+    var history: [RPSMatch]?
+    
+    // MARK: Private Methods
+    
+    private func generateWinText(match: RPSMatch) -> String {
+        if match.p1 == match.p2 {
+            return "Tie!"
+        } else {
+            return match.winner == match.p1 ? "Win!" : "Lose."
+        }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // MARK: Data Source Methods
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let history = history else {
+            return 0
+        }
+        
+        return history.count
     }
-    */
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // set table view's data source
+        tableView.dataSource = self
+        
+        // dequeue and decorate the cell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        
+        let match = history?[indexPath.row]
+        cell.textLabel?.text = generateWinText(match: match!)
+        cell.detailTextLabel?.text = match!.p1.description + " vs. " + match!.p2.description
+        return cell
+    }
+    
+    // MARK: Actions
+    
+    @IBAction func dismiss(_ sender: UIBarButtonItem) {
+        dismiss(animated: true, completion: nil)
+    }
 
 }

@@ -44,7 +44,6 @@ class PlayViewController: UIViewController {
     
     
     
-    
     // MARK: Play!
     
     func throwDown(_ playersMove: RPS) {
@@ -67,6 +66,7 @@ class PlayViewController: UIViewController {
             
             // set labels and image
             controller.movesText = "You played \(self.match.p1).\nComputer played \(self.match.p2)."
+            controller.history = history
             
             switch self.match.p2 {
             case .rock:
@@ -100,6 +100,7 @@ class PlayViewController: UIViewController {
         let controller = segue.destination as! ResultsViewController
         
         controller.movesText = "You played \(self.match.p1).\nComputer played \(self.match.p2)."
+        controller.history = history
         
         if segue.identifier == "playPaper" {
             // set labels and image

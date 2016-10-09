@@ -15,6 +15,7 @@ class ResultsViewController: UIViewController {
     var movesText: String?
     var resultsText: String?
     var image: UIImage?
+    var history: [RPSMatch]?
     
     // MARK: Outlets
     
@@ -38,6 +39,15 @@ class ResultsViewController: UIViewController {
 
     @IBAction func playAgain(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    // MARK: Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toHistory" {
+            let destination = segue.destination as! HistoryViewController
+            destination.history = history
+        }
     }
     
 
