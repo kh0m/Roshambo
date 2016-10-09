@@ -42,34 +42,7 @@ class PlayViewController: UIViewController {
         }
     }
     
-    @IBAction func playRock(_ sender: UIButton) {
-        // computer moves
-        let computerChoice = RPS()
-        
-        // The RPSMatch struct stores the results of a match
-        self.match = RPSMatch(p1: .rock, p2: computerChoice)
-        
-        // declare the controller
-        let controller = self.storyboard?.instantiateViewController(withIdentifier: "ResultsViewController") as! ResultsViewController
-        
-        // set labels and image
-        controller.movesText = "You played \(self.match.p1).\nComputer played \(self.match.p2)."
-        
-        switch computerChoice {
-        case .rock:
-            controller.resultsText = "It's a tie!"
-            controller.image = #imageLiteral(resourceName: "itsATie")
-        case .paper:
-            controller.resultsText = "Paper covers rock! You lose!"
-            controller.image = #imageLiteral(resourceName: "PaperCoversRock")
-        case .scissors:
-            controller.resultsText = "Rock crushes scissors! You win!"
-            controller.image = #imageLiteral(resourceName: "RockCrushesScissors")
-        }
-        
-        // present the view controller
-        present(controller, animated: true, completion: nil)
-    }
+    
     
     
     // MARK: Play!
